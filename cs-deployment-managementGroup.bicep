@@ -155,11 +155,20 @@ module ioaAzureSubscription 'modules/cs-ioa-deployment.bicep' = if (deployIOA &&
   }
 }
 
+/* Create user-assigned Managed Identity to be used for getting all Azure Subscriptions */
+module activityLogIdentity 'ioa/activityLogIdentity.bicep' = if if (deployIOA && targetScope == 'ManagementGroup' && deployActivityLogDiagnosticSettings) {
+  name: '${deploymentNamePrefix}-activityLogIdentity-${deploymentNameSuffix}'
+  scope: scope
+  params: {
+    activityLogIdentityName: 'cs-activityLogDeployment-${defaultSubscriptionId}'
+  }
+}
+
 module activityLogIdentityRoleAssignment 'modules/ioa/activityLogIdentityRoleAssignment.bicep' = if (deployIOA && targetScope == 'ManagementGroup' && deployActivityLogDiagnosticSettings) {
   name: '${deploymentNamePrefix}-ioa-activityLogIdentityRoleAssignment-${deploymentNameSuffix}'
   params: {
-    activityLogIdentityId: ioaAzureSubscription.outputs.activityLogIdentityId
-    activityLogIdentityPrincipalId: ioaAzureSubscription.outputs.activityLogIdentityPrincipalId
+    activityLogIdentityId: activityLogIdentity.outputs.activityLogIdentityId
+    activityLogIdentityPrincipalId: activityLogIdentity.outputs.activityLogIdentityPrincipalId
   }
 }
 
@@ -167,7 +176,7 @@ module activityLogDiagnosticSettingsDeployment 'modules/cs-ioa-diagnosticsetting
   name: '${deploymentNamePrefix}-ioa-activityLogDiagnosticSettingsDeployment-${deploymentNameSuffix}'
   scope: subscription(defaultSubscriptionId)
   params: {
-    activityLogIdentityId: ioaAzureSubscription.outputs.activityLogIdentityId
+    activityLogIdentityId: activityLogIdentity.outputs.activityLogIdentityId
     defaultSubscriptionId: defaultSubscriptionId
     eventHubName: ioaAzureSubscription.outputs.activityLogEventHubName
     eventHubAuthorizationRuleId: ioaAzureSubscription.outputs.eventHubAuthorizationRuleId

@@ -103,7 +103,7 @@ You can use any of these methods to pass parameters:
 | `deployEntraLogDiagnosticSettings`      | no       | Deploy Entra Log Diagnostic Settings. Defaults to `true`.                                                                      |
 
 ## Resource Names
-Do not change the names of the following Azure resources as they are used for registration validation and must remain unchanged. Other resource names in the files can be changed according to your internal naming convention.
+Do not change the names of the following Azure azurresources as they are used for registration validation and must remain unchanged. Other resource names in the files can be changed according to your internal naming convention.
 - Diagnostic Setting in subscription:
    - Default name: cs-monitor-activity-to-eventhub
 - IOA Resource Group:
