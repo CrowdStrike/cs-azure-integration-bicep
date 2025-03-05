@@ -392,5 +392,5 @@ module setAzureDefaultSubscription 'ioa/defaultSubscription.bicep' = {
 output eventHubAuthorizationRuleId string = eventHub.outputs.eventHubAuthorizationRuleId
 output activityLogEventHubName string = eventHub.outputs.activityLogEventHubName
 output entraLogEventHubName string = eventHub.outputs.entraLogEventHubName
-output activityLogIdentityId string = activityLogIdentity.outputs.activityLogIdentityId
-output activityLogIdentityPrincipalId string = activityLogIdentity.outputs.activityLogIdentityPrincipalId
+output activityLogIdentityId string = (deployActivityLogDiagnosticSettings && targetScope == 'ManagementGroup') ? activityLogIdentity.outputs.activityLogIdentityId : ''
+output activityLogIdentityPrincipalId string = (deployActivityLogDiagnosticSettings && targetScope == 'ManagementGroup') ? activityLogIdentity.outputs.activityLogIdentityPrincipalId : ''
