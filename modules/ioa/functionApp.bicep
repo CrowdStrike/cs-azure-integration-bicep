@@ -70,7 +70,7 @@ resource functionApp 'Microsoft.Web/sites@2020-12-01' = {
         }
         {
           name: 'FUNCTIONS_WORKER_RUNTIME_VERSION'
-          value: '3.9'
+          value: '3.12'
         }
         {
           name: 'FUNCTIONS_EXTENSION_VERSION'
@@ -138,9 +138,9 @@ resource functionApp 'Microsoft.Web/sites@2020-12-01' = {
           priority: 0
         }
       ]
-      linuxFxVersion: 'PYTHON|3.9'
+      linuxFxVersion: 'PYTHON|3.12'
       minTlsVersion: '1.2'
-      pythonVersion: '3.9'
+      pythonVersion: '3.12'
       scmIpSecurityRestrictionsUseMain: true
       use32BitWorkerProcess: false
       vnetName: virtualNetworkName
