@@ -13,6 +13,7 @@ var customRole = {
     'Microsoft.Web/sites/Read'
     'Microsoft.Web/sites/config/Read'
     'Microsoft.Web/sites/config/list/Action'
+    'Microsoft.Web/sites/publish/Action'
   ]
 }
 
