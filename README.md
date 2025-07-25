@@ -31,6 +31,7 @@ The Bicep files in this repo register an Azure management group (and all Subscri
   - Microsoft.Web/sites/Read
   - Microsoft.Web/sites/config/Read
   - Microsoft.Web/sites/config/list/Action
+  - Microsoft.Web/sites/publish/Action
 - If the `deployIOA` parameter is set to true, the file also:
    - Deploys an Event Hub Namespace, two Event Hubs, two App Service Plans, and additional infrastructure to the subscription that has been designated as the default subscription (which is done via the `defaultSubscriptionId` parameter). This infrastructure is used to stream Entra ID Sign In and Audit Logs, as well as Azure Activity logs, to Falcon Cloud Security.
    - Creates a Microsoft Entra ID diagnostic setting that forwards Sign In and Audit Logs to the newly-created Event Hub
