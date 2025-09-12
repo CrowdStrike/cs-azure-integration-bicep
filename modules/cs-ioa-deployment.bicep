@@ -84,7 +84,7 @@ param activityLogSettings object = {
   functionAppName: 'cs-activity-func-${defaultSubscriptionId}' // DO NOT CHANGE - used for registration validation
   functionAppIdentityName: 'cs-activity-func-${defaultSubscriptionId}' // DO NOT CHANGE - used for registration validation
   functionAppDiagnosticSettingName: 'cs-activity-func-to-storage'
-  ioaPackageURL: 'https://cs-prod-cloudconnect-templates.s3-us-west-1.amazonaws.com/azure/4.x/ioa.zip'
+  ioaPackageURL: 'https://cs-prod-cloudconnect-templates.s3-us-west-1.amazonaws.com/azure/3.11/ioa.zip'
   storageAccountName: substring('cshorizonact${randomSuffix}', 0, 24)
   storageAccountIdentityName: substring('cshorizonact${randomSuffix}', 0, 24)
   storagePrivateEndpointName: 'activity-storage-private-endpoint'
@@ -99,7 +99,7 @@ param entraLogSettings object = {
   functionAppName: 'cs-aad-func-${defaultSubscriptionId}' // DO NOT CHANGE - used for registration validation
   functionAppIdentityName: 'cs-aad-func-${defaultSubscriptionId}' // DO NOT CHANGE - used for registration validation
   functionAppDiagnosticSettingName: 'cs-aad-func-to-storage'
-  ioaPackageURL: 'https://cs-prod-cloudconnect-templates.s3-us-west-1.amazonaws.com/azure/4.x/ioa.zip'
+  ioaPackageURL: 'https://cs-prod-cloudconnect-templates.s3-us-west-1.amazonaws.com/azure/3.11/ioa.zip'
   storageAccountName: substring('cshorizonaad${randomSuffix}', 0, 24)
   storageAccountIdentityName: substring('cshorizonaad${randomSuffix}', 0, 24)
   storagePrivateEndpointName: 'aad-storage-private-endpoint'
