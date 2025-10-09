@@ -18,7 +18,7 @@ resource azureSubscriptions 'Microsoft.Resources/deploymentScripts@2023-08-01' =
       param([string] $AzureTenantId)
       $DeploymentScriptOutputs = @{}
       $activeSubscriptions = Get-AzSubscription | ? {($_.State -eq "Enabled") -and ($_.TenantId -eq $AzureTenantId)} | Select-Object -ExpandProperty Id
-      $DeploymentScriptOutputs['subscriptions'] = $activeSubscriptions
+      $DeploymentScriptOutputs['subscriptions'] = @($activeSubscriptions)
     '''
     retentionInterval: 'PT1H'
     cleanupPreference: 'OnSuccess'
