@@ -140,4 +140,7 @@ module ioaAzureSubscription 'modules/cs-ioa-deployment.bicep' = if (deployIOA &&
     location: location
     tags: tags
   }
+  dependsOn: [
+      iomAzureSubscription
+  ]
 }
