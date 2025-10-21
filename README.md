@@ -1,6 +1,6 @@
 # (LEGACY) Falcon Cloud Security Registration with Azure Bicep
 
-The Azure Bicep templates in this repository allow for an easy and seamless integration of Azure environments into CrowdStrike Falcon Cloud Security.
+This Bicep template is to support legacy onboarding methods. To view the Bicep template for our current onboarding experience, please click [here](https://github.com/CrowdStrike/azure-bicep-cloud-registration).
 
 ## Table of Contents
 1. [Overview](#overview)
