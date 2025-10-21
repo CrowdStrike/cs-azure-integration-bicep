@@ -1,6 +1,4 @@
-![CrowdStrike Falcon](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo.png)
-
-# Falcon Cloud Security Registration with Azure Bicep
+# (LEGACY) Falcon Cloud Security Registration with Azure Bicep
 
 The Azure Bicep templates in this repository allow for an easy and seamless integration of Azure environments into CrowdStrike Falcon Cloud Security.
 
