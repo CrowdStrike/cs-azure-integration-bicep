@@ -14,6 +14,9 @@ var customRole = {
     'Microsoft.Web/sites/config/Read'
     'Microsoft.Web/sites/config/list/Action'
     'Microsoft.Web/sites/publish/Action'
+    'Microsoft.Authorization/locks/Read'
+    'Microsoft.Authorization/locks/Write'
+    'Microsoft.Authorization/locks/Delete'
   ]
 }
 
