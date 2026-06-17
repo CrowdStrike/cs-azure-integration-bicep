@@ -14,6 +14,8 @@ param azurePrincipalType string = 'ServicePrincipal'
 
 param customRoleDefinitionId string
 
+param resourceLockRoleDefinitionId string
+
 var roleDefinitionIds = [
   'acdd72a7-3385-48ef-bd42-f606fba81ae7' // Reader
   '39bc4728-0917-49c7-9d2c-d95423bc2eb4' // Security Reader
@@ -40,6 +42,19 @@ resource customRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
   )
   properties: {
     roleDefinitionId: customRoleDefinitionId
+    principalId: azurePrincipalId
+    principalType: azurePrincipalType
+  }
+}
+
+resource resourceLockRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(
+    azurePrincipalId,
+    resourceLockRoleDefinitionId,
+    subscription().id
+  )
+  properties: {
+    roleDefinitionId: resourceLockRoleDefinitionId
     principalId: azurePrincipalId
     principalType: azurePrincipalType
   }

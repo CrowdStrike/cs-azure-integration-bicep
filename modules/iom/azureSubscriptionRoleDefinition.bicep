@@ -17,6 +17,14 @@ var customRole = {
   ]
 }
 
+var resourceLockRole = {
+  roleName: 'Resource Lock Administrator'
+  roleDescription: 'Can Administer Resource Locks.'
+  roleActions: [
+    'Microsoft.Authorization/locks/*'
+  ]
+}
+
 resource customRoleDefinition 'Microsoft.Authorization/roleDefinitions@2022-04-01' = {
   name: guid(customRole.roleName, tenant().tenantId)
   properties: {
@@ -33,4 +41,21 @@ resource customRoleDefinition 'Microsoft.Authorization/roleDefinitions@2022-04-0
   }
 }
 
+resource resourceLockRoleDefinition 'Microsoft.Authorization/roleDefinitions@2022-04-01' = {
+  name: guid(resourceLockRole.roleName, tenant().tenantId)
+  properties: {
+    assignableScopes: [subscription().id]
+    description: resourceLockRole.roleDescription
+    permissions: [
+      {
+        actions: resourceLockRole.roleActions
+        notActions: []
+      }
+    ]
+    roleName: resourceLockRole.roleName
+    type: 'CustomRole'
+  }
+}
+
 output customRoleDefinitionId string = customRoleDefinition.id
+output resourceLockRoleDefinitionId string = resourceLockRoleDefinition.id
