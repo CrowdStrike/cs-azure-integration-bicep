@@ -24,6 +24,14 @@ var customRole = {
   ]
 }
 
+var resourceLockRole = {
+  roleName: 'Resource Lock Administrator'
+  roleDescription: 'Can Administer Resource Locks.'
+  roleActions: [
+    'Microsoft.Authorization/locks/*'
+  ]
+}
+
 var roleDefinitionIds = [
   'acdd72a7-3385-48ef-bd42-f606fba81ae7' // Reader
   '39bc4728-0917-49c7-9d2c-d95423bc2eb4' // Security Reader
@@ -66,6 +74,35 @@ resource customRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
   )
   properties: {
     roleDefinitionId: customRoleDefinition.id
+    principalId: azurePrincipalId
+    principalType: azurePrincipalType
+  }
+}
+
+resource resourceLockRoleDefinition 'Microsoft.Authorization/roleDefinitions@2022-04-01' = {
+  name: guid(resourceLockRole.roleName, managementGroup().id)
+  properties: {
+    assignableScopes: [managementGroup().id]
+    description: resourceLockRole.roleDescription
+    permissions: [
+      {
+        actions: resourceLockRole.roleActions
+        notActions: []
+      }
+    ]
+    roleName: resourceLockRole.roleName
+    type: 'CustomRole'
+  }
+}
+
+resource resourceLockRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(
+    azurePrincipalId,
+    resourceLockRoleDefinition.id,
+    managementGroup().id
+  )
+  properties: {
+    roleDefinitionId: resourceLockRoleDefinition.id
     principalId: azurePrincipalId
     principalType: azurePrincipalType
   }

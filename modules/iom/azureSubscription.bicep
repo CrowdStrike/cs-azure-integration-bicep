@@ -144,6 +144,7 @@ module azureSubscriptionRoleAssignment 'azureSubscriptionRoleAssignment.bicep' =
     azurePrincipalType: azurePrincipalType
     azurePrincipalId: useExistingAppRegistration ? azurePrincipalId : azureAppRegistration.outputs.servicePrincipalId
     customRoleDefinitionId: subscription().subscriptionId == defaultSubscriptionId ? azureSubscriptionRoleDefinition.outputs.customRoleDefinitionId : azureSubscriptionExistingRoleDefinition.outputs.customRoleDefinitionId
+    resourceLockRoleDefinitionId: subscription().subscriptionId == defaultSubscriptionId ? azureSubscriptionRoleDefinition.outputs.resourceLockRoleDefinitionId : azureSubscriptionExistingRoleDefinition.outputs.resourceLockRoleDefinitionId
   }
 }
 

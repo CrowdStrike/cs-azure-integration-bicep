@@ -20,10 +20,25 @@ var customRole = {
   ]
 }
 
+var resourceLockRole = {
+  roleName: 'Resource Lock Administrator'
+  roleDescription: 'Can Administer Resource Locks.'
+  roleActions: [
+    'Microsoft.Authorization/locks/*'
+  ]
+}
+
 module assignableScope 'azureRoleDefinitionAssignableScope.bicep' = {
     name: guid('getAssignableScope',customRole.roleName, subscription().id)
     params: {
         customRoleName: customRole.roleName
+      }
+    }
+
+module resourceLockAssignableScope 'azureRoleDefinitionAssignableScope.bicep' = {
+    name: guid('getAssignableScope',resourceLockRole.roleName, subscription().id)
+    params: {
+        customRoleName: resourceLockRole.roleName
       }
     }
 
@@ -43,4 +58,21 @@ resource modifyExistingCustomRoleDefinition 'Microsoft.Authorization/roleDefinit
   }
 }
 
+resource modifyExistingResourceLockRoleDefinition 'Microsoft.Authorization/roleDefinitions@2022-04-01' = {
+  name: guid(resourceLockRole.roleName, tenant().tenantId)
+  properties: {
+    assignableScopes: union(resourceLockAssignableScope.outputs.assignableScopes,[subscriptionId])
+    description: resourceLockRole.roleDescription
+        permissions: [
+          {
+            actions: resourceLockRole.roleActions
+            notActions: []
+          }
+        ]
+        roleName: resourceLockRole.roleName
+        type: 'CustomRole'
+  }
+}
+
 output customRoleDefinitionId string = modifyExistingCustomRoleDefinition.id
+output resourceLockRoleDefinitionId string = modifyExistingResourceLockRoleDefinition.id
